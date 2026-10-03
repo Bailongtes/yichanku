@@ -16,8 +16,14 @@
     category: "all",
     tag: null,
     query: "",
-    sort: "default"
+    sort: "default",
+    month: null,         // "2026-11" — 停服游戏按月细分
+    company: null
   };
+
+  var GAME_CAT = "relic";
+
+  function isGame(e) { return !!e.game; }
 
   var el = {
     main:       document.getElementById("main"),
@@ -51,6 +57,43 @@
     return DATA.entries.filter(function (e) { return e.category === id; }).length;
   }
 
+  /* ---------- game helpers ---------- */
+  function gameEntries() {
+    return DATA.entries.filter(isGame);
+  }
+
+  function monthKey(e) {
+    var m = e.game.endMonth, y = e.game.endYear;
+    return y + "-" + (m < 10 ? "0" + m : m);
+  }
+
+  function monthLabel(key) {
+    var p = key.split("-");
+    return p[0] + "年" + parseInt(p[1], 10) + "月";
+  }
+
+  /* 停服月份列表,新的在前 */
+  function gameMonths() {
+    var seen = {}, out = [];
+    gameEntries().forEach(function (e) {
+      var k = monthKey(e);
+      if (!seen[k]) { seen[k] = 0; out.push(k); }
+      seen[k]++;
+    });
+    return out.sort().reverse().map(function (k) {
+      return { key: k, label: monthLabel(k), count: seen[k] };
+    });
+  }
+
+  /* 即将停服(2026-09 及以后) */
+  function upcomingGames() {
+    return gameEntries()
+      .filter(function (e) { return e.game.future; })
+      .sort(function (a, b) {
+        return a.game.end < b.game.end ? -1 : a.game.end > b.game.end ? 1 : 0;
+      });
+  }
+
   /* All tags with frequency, sorted */
   function allTags() {
     var map = {};
@@ -70,6 +113,14 @@
     if (state.category !== "all") {
       list = list.filter(function (e) { return e.category === state.category; });
     }
+    if (state.month === "__upcoming__") {
+      list = list.filter(function (e) { return isGame(e) && e.game.future; });
+    } else if (state.month) {
+      list = list.filter(function (e) { return isGame(e) && monthKey(e) === state.month; });
+    }
+    if (state.company) {
+      list = list.filter(function (e) { return isGame(e) && e.game.company === state.company; });
+    }
     if (state.tag) {
       list = list.filter(function (e) { return (e.tags || []).indexOf(state.tag) > -1; });
     }
@@ -80,7 +131,9 @@
           (e.tags || []).join(" "),
           catOf(e.category).name,
           (e.lore || []).join(" "),
-          (e.drops || []).join(" ")
+          (e.drops || []).join(" "),
+          e.game ? e.game.company : "",
+          e.game ? e.game.start + " " + e.game.end : ""
         ].join(" ").toLowerCase();
         return hay.indexOf(q) > -1;
       });
@@ -101,6 +154,18 @@
           return catOf(a.category).name.localeCompare(catOf(b.category).name, "zh");
         });
         break;
+      case "days":
+        list.sort(function (a, b) {
+          return (b.game ? b.game.days : 0) - (a.game ? a.game.days : 0);
+        });
+        break;
+      case "shutdown":
+        list.sort(function (a, b) {
+          var x = a.game ? a.game.end : "9999";
+          var y = b.game ? b.game.end : "9999";
+          return x < y ? -1 : x > y ? 1 : 0;
+        });
+        break;
     }
     return list;
   }
@@ -111,9 +176,33 @@
     html += navRow("all", "全部典藏", "📚", countCat("all"));
     DATA.categories.forEach(function (c) {
       html += navRow(c.id, c.name, c.glyph, countCat(c.id));
+
+      /* 停服游戏展开:按月细分 */
+      if (c.id === GAME_CAT) {
+        var months = gameMonths();
+        var upcoming = upcomingGames().length;
+        var open = state.category === GAME_CAT;
+
+        html += '<div class="subnav' + (open ? " open" : "") + '">';
+        html += '<div class="subnav-item subnav-hot' +
+                (state.month === "__upcoming__" ? " active" : "") +
+                '" data-month="__upcoming__">' +
+                  '<span class="glyph">⚠</span><span>即将停服</span>' +
+                  '<span class="count">' + upcoming + "</span></div>";
+        html += '<div class="subnav-item' + (!state.month ? " active" : "") +
+                '" data-month=""><span class="glyph">◇</span><span>全部月份</span></div>';
+        months.forEach(function (m) {
+          html += '<div class="subnav-item' + (state.month === m.key ? " active" : "") +
+                  '" data-month="' + m.key + '">' +
+                    '<span class="glyph">▸</span><span>' + esc(m.label) + "</span>" +
+                    '<span class="count">' + m.count + "</span></div>";
+        });
+        html += "</div>";
+      }
     });
     el.catNav.innerHTML = html;
 
+    /* 标签云:游戏库占多数,改为厂商 + 停服年月混合 */
     var tags = allTags();
     el.tagCloud.innerHTML = tags.slice(0, 22).map(function (t) {
       var active = state.tag === t.tag ? " active" : "";
@@ -135,16 +224,37 @@
   function cardHTML(e, idx) {
     var c = catOf(e.category);
     var delay = Math.min(idx * 30, 400);
+    var isG = isGame(e);
+
+    var art;
+    if (isG && e.game.img) {
+      art = '<div class="card-art game-art">' +
+              '<img src="' + esc(e.game.img) + '" alt="' + esc(e.name) + '" loading="lazy" ' +
+                   'onerror="this.parentNode.classList.add(\'img-fail\');this.remove()">' +
+              '<span class="glyph">' + esc(e.glyph) + "</span>" +
+            "</div>";
+    } else {
+      art = '<div class="card-art"><span class="glyph">' + esc(e.glyph) + "</span></div>";
+    }
+
+    var footRight = isG
+      ? '<span class="card-cat">📅 ' + esc(e.game.end.replace(/-/g, "/")) + "</span>"
+      : '<span class="card-cat">' + c.glyph + " " + esc(c.name) + "</span>";
+
+    var badge = (isG && e.game.future)
+      ? '<span class="soon-badge">即将停服</span>' : "";
+
     return '<article class="card" data-id="' + esc(e.id) + '" data-rarity="' + esc(e.rarity) +
            '" style="animation-delay:' + delay + 'ms">' +
-             '<div class="card-art"><span class="glyph">' + esc(e.glyph) + "</span></div>" +
+             badge +
+             art +
              '<div class="card-body">' +
                '<h3 class="card-title">' + esc(e.name) + "</h3>" +
                '<div class="card-en">' + esc(e.en) + "</div>" +
                '<p class="card-desc">' + esc(e.desc) + "</p>" +
                '<div class="card-foot">' +
                  '<span class="rarity ' + esc(e.rarity) + '">' + (RARITY_LABEL[e.rarity] || e.rarity) + "</span>" +
-                 '<span class="card-cat">' + c.glyph + " " + esc(c.name) + "</span>" +
+                 footRight +
                "</div>" +
              "</div>" +
            "</article>";
@@ -153,11 +263,9 @@
   /* ---------- view: home ---------- */
   function viewHome() {
     var m = DATA.meta;
-    var featured = DATA.entries
-      .filter(function (e) { return e.rarity === "mythic" || e.rarity === "legendary"; })
-      .slice(0, 6);
-
-    var latest = DATA.entries.slice().reverse().slice(0, 8);
+    var games = gameEntries();
+    var upcoming = upcomingGames();
+    var months = gameMonths();
 
     var html = "";
     html += '<section class="hero">' +
@@ -166,25 +274,73 @@
       "<h1>" + esc(m.title) + "</h1>" +
       "<p>" + esc(m.intro) + "</p>" +
       '<div class="hero-stats">' +
+        stat(games.length, "停服游戏") +
+        stat(upcoming.length, "即将停服") +
+        stat(months.length, "停服月份") +
         stat(DATA.entries.length, "收录条目") +
-        stat(DATA.categories.length, "典藏分类") +
-        stat(allTags().length, "关联标签") +
-        stat(featured.length + "+", "神话与传说") +
       "</div>" +
     "</section>";
 
+    /* 即将停服名录 */
+    if (upcoming.length) {
+      html += '<div class="section-head">' +
+        "<div><h2>⚠ 停服通告 · 即将终止</h2>" +
+        '<div class="sub">以下作品已公布停服预定,留给你道别的时间不多了</div></div>' +
+        '<button class="clear-btn" data-goto="browse">浏览全部 →</button>' +
+      "</div>";
+      html += '<div class="grid">' + upcoming.slice(0, 8).map(cardHTML).join("") + "</div>";
+      if (upcoming.length > 8) {
+        html += '<p class="more-hint">还有 ' + (upcoming.length - 8) +
+                ' 款即将停服作品 · <a href="#/month/__upcoming__">查看全部 ⚠</a></p>';
+      }
+      html += '<div class="divider"><i>❖</i></div>';
+    }
+
+    /* 运营传奇 —— 最长的几款 */
+    var longliving = games.slice().sort(function (a, b) {
+      return b.game.days - a.game.days;
+    }).slice(0, 4);
+
+    html += '<div class="section-head">' +
+      "<div><h2>传奇 · 运营最久的作品</h2>" +
+      '<div class="sub">在手机游戏普遍活不过三年的荒原上,它们撑下来了</div></div>' +
+    "</div>";
+    html += '<div class="grid">' + longliving.map(cardHTML).join("") + "</div>";
+
+    /* 最近停服 */
+    var recent = games.slice().sort(function (a, b) {
+      return a.game.end < b.game.end ? 1 : a.game.end > b.game.end ? -1 : 0;
+    }).slice(0, 8);
+
+    html += '<div class="divider"><i>❖</i></div>';
+    html += '<div class="section-head">' +
+      "<div><h2>近录 · 最新停服</h2>" +
+      '<div class="sub">按终止日期倒序</div></div>' +
+    "</div>";
+    html += '<div class="grid">' + recent.map(cardHTML).join("") + "</div>";
+
+    /* 按月份浏览 */
+    html += '<div class="divider"><i>❖</i></div>';
+    html += '<div class="section-head">' +
+      "<div><h2>编年 · 按停服月份翻检</h2>" +
+      '<div class="sub">共 ' + months.length + ' 个月份的名录</div></div>' +
+    "</div>";
+    html += '<div class="month-grid">' + months.map(function (mm) {
+      return '<a class="month-tile" href="#/month/' + mm.key + '">' +
+               '<span class="mt-label">' + esc(mm.label) + "</span>" +
+               '<span class="mt-count">' + mm.count + " 款</span>" +
+             "</a>";
+    }).join("") + "</div>";
+
+    html += '<div class="divider"><i>❖</i></div>';
     html += '<div class="section-head">' +
       "<div><h2>卷首 · 神话与传说</h2>" +
       '<div class="sub">凡被记入此卷者,皆已无可挽回</div></div>' +
-      '<button class="clear-btn" data-goto="browse">浏览全部典藏 →</button>' +
     "</div>";
-    html += '<div class="grid">' + featured.map(cardHTML).join("") + "</div>";
-
-    html += '<div class="divider"><i>❖</i></div>';
-
-    html += '<div class="section-head"><div><h2>近录 · 新增条目</h2>' +
-      '<div class="sub">由历代测绘员陆续补录</div></div></div>';
-    html += '<div class="grid">' + latest.map(cardHTML).join("") + "</div>";
+    var feats = DATA.entries.filter(function (e) {
+      return !isGame(e) && (e.rarity === "mythic" || e.rarity === "legendary");
+    }).slice(0, 4);
+    html += '<div class="grid">' + feats.map(cardHTML).join("") + "</div>";
 
     el.main.innerHTML = html;
   }
@@ -197,9 +353,20 @@
   function viewBrowse() {
     var list = filtered();
     var c = catOf(state.category);
+    var isGameBrowse = state.category === GAME_CAT || state.month || state.company;
+    var upcoming = state.month === "__upcoming__";
 
     var title, sub;
-    if (state.tag) {
+    if (upcoming) {
+      title = "⚠ 即将停服";
+      sub = "已公布停服预定、服务尚未终止的作品";
+    } else if (state.month) {
+      title = "停服名录 · " + monthLabel(state.month);
+      sub = "于该月终止服务的手机游戏";
+    } else if (state.company) {
+      title = "厂商 · " + state.company;
+      sub = "由该厂商运营并已终止的作品";
+    } else if (state.tag) {
       title = "标签 · " + state.tag;
       sub = "筛选出同时带有该标签的条目";
     } else if (state.category === "all") {
@@ -215,17 +382,30 @@
       "<div><h2>" + esc(title) + "</h2>" +
       '<div class="sub">' + esc(sub) + "</div></div></div>";
 
+    if (isGameBrowse) {
+      var months = gameMonths();
+      html += '<div class="month-strip">' +
+        '<a class="mchip mchip-hot' + (upcoming ? " active" : "") +
+          '" href="#/month/__upcoming__">⚠ 即将停服</a>' +
+        '<a class="mchip' + (state.category === GAME_CAT && !state.month && !state.company ? " active" : "") +
+          '" href="#/cat/' + GAME_CAT + '">全部 ' + gameEntries().length + '</a>' +
+        months.map(function (mm) {
+          return '<a class="mchip' + (state.month === mm.key ? " active" : "") +
+                 '" href="#/month/' + mm.key + '">' + esc(mm.label) + "</a>";
+        }).join("") +
+      "</div>";
+    }
+
     html += '<div class="toolbar">' +
       '<select class="select" id="sortSelect">' +
         opt("default", "排序:默认", state.sort) +
+        (isGameBrowse ? opt("shutdown", "排序:停服日期", state.sort) : "") +
+        (isGameBrowse ? opt("days", "排序:运营天数", state.sort) : "") +
         opt("name", "排序:名称", state.sort) +
         opt("rarity", "排序:稀有度", state.sort) +
-        opt("category", "排序:分类", state.sort) +
       "</select>" +
-      (state.tag || state.category !== "all" || state.query
-        ? '<button class="clear-btn" id="clearFilters">清除筛选 ✕</button>'
-        : "") +
-      '<span class="result-count">共 <b>' + list.length + "</b> 条" +
+      '<button class="clear-btn" id="clearFilters">清除筛选 ✕</button>' +
+      '<span class="result-count">共 <b>' + list.length + "</b> 款" +
         (state.query ? " · 关键词「" + esc(state.query) + "」" : "") +
         (state.tag ? " · 标签「" + esc(state.tag) + "」" : "") +
       "</span>" +
@@ -255,32 +435,51 @@
     if (!e) { el.main.innerHTML = notFound(); return; }
 
     var c = catOf(e.category);
+    var isG = isGame(e);
 
     var html = '<article class="detail">';
 
     html += '<nav class="breadcrumb">' +
       '<a href="#/">遗产库</a><span class="sep">/</span>' +
       '<a href="#/cat/' + esc(c.id) + '">' + c.glyph + " " + esc(c.name) + "</a>" +
+      (isG ? '<span class="sep">/</span><a href="#/month/' + monthKey(e) + '">' +
+              esc(monthLabel(monthKey(e))) + "</a>" : "") +
       '<span class="sep">/</span><span>' + esc(e.name) + "</span>" +
     "</nav>";
 
+    var detailArt = (isG && e.game.img)
+      ? '<div class="detail-art game-art">' +
+          '<img src="' + esc(e.game.img) + '" alt="' + esc(e.name) + '" ' +
+               'onerror="this.parentNode.classList.add(\'img-fail\');this.remove()">' +
+          '<span class="glyph">' + esc(e.glyph) + "</span></div>"
+      : '<div class="detail-art"><span class="glyph">' + esc(e.glyph) + "</span></div>";
+
     html += '<div class="detail-head">' +
-      '<div class="detail-art"><span class="glyph">' + esc(e.glyph) + "</span></div>" +
+      detailArt +
       '<div class="detail-info">' +
         '<div class="eyebrow">' + esc(c.en) + "</div>" +
         "<h1>" + esc(e.name) + "</h1>" +
-        '<div class="detail-en">' + esc(e.en) + "</div>" +
+        '<div class="detail-en">' + esc(isG ? (e.game.company || e.en) : e.en) + "</div>" +
         '<div class="detail-meta">' +
           '<span class="rarity ' + esc(e.rarity) + '">' + (RARITY_LABEL[e.rarity] || e.rarity) + "</span>" +
-          '<span class="rarity common">' + c.glyph + " " + esc(c.name) + "</span>" +
-          (e.tags || []).map(function (t) {
-            return '<span class="tag-chip" data-tag="' + esc(t) + '">' + esc(t) + "</span>";
-          }).join("") +
+          (isG && e.game.future ? '<span class="soon-badge inline">即将停服</span>' : "") +
+          (isG
+            ? '<span class="tag-chip" data-month="' + monthKey(e) + '">📅 ' + esc(monthLabel(monthKey(e))) + "</span>"
+            : '<span class="rarity common">' + c.glyph + " " + esc(c.name) + "</span>") +
+          (isG && e.game.company
+            ? '<span class="tag-chip" data-company="' + esc(e.game.company) + '">🏢 ' + esc(e.game.company) + "</span>"
+            : "") +
+          (isG
+            ? ""
+            : (e.tags || []).map(function (t) {
+                return '<span class="tag-chip" data-tag="' + esc(t) + '">' + esc(t) + "</span>";
+              }).join("")) +
         "</div>" +
         '<p class="detail-desc">' + esc(e.desc) + "</p>" +
-        (e.habitat ? metaLine("出没 / 现存", e.habitat) : "") +
-        (e.weakness ? metaLine("弱点 / 破解", e.weakness) : "") +
-        (e.drops && e.drops.length ? metaLine("掉落 / 遗存", e.drops.join(" · ")) : "") +
+        (isG ? gameFacts(e) : "") +
+        (!isG && e.habitat ? metaLine("出没 / 现存", e.habitat) : "") +
+        (!isG && e.weakness ? metaLine("弱点 / 破解", e.weakness) : "") +
+        (!isG && e.drops && e.drops.length ? metaLine("掉落 / 遗存", e.drops.join(" · ")) : "") +
       "</div>" +
     "</div>";
 
@@ -310,16 +509,31 @@
       .slice(0, 4);
 
     if (!rel.length) {
-      /* fallback: same category, excluding self */
-      rel = DATA.entries
-        .filter(function (x) { return x.category === e.category && x.id !== e.id; })
-        .slice(0, 4);
+      if (isG) {
+        /* 同厂商优先,其次同月停服 */
+        var sameCo = gameEntries().filter(function (x) {
+          return x.id !== e.id && x.game.company === e.game.company;
+        });
+        var sameMonth = gameEntries().filter(function (x) {
+          return x.id !== e.id && monthKey(x) === monthKey(e);
+        });
+        var seenR = {};
+        rel = sameCo.concat(sameMonth).filter(function (x) {
+          if (seenR[x.id]) return false;
+          seenR[x.id] = 1; return true;
+        }).slice(0, 4);
+      } else {
+        rel = DATA.entries.filter(function (x) {
+          return x.category === e.category && x.id !== e.id;
+        }).slice(0, 4);
+      }
     }
 
     if (rel.length) {
       html += '<div class="divider"><i>❖</i></div>';
       html += '<div class="section-head"><div><h2>相关条目</h2>' +
-        '<div class="sub">编纂者认为你还会翻阅这些</div></div></div>';
+        '<div class="sub">' + (isG ? "同一厂商,或同月停服的作品" : "编纂者认为你还会翻阅这些") +
+        "</div></div></div>";
       html += '<div class="grid related-grid">' + rel.map(cardHTML).join("") + "</div>";
     }
 
@@ -332,6 +546,39 @@
            'letter-spacing:.18em;text-transform:uppercase;color:var(--parchment-mute)">' +
            esc(k) + "</span><br>" +
            '<span style="color:var(--parchment)">' + esc(v) + "</span></div>";
+  }
+
+  function isoLabel(d) {
+    var p = d.split("-");
+    return p[0] + "年" + parseInt(p[1], 10) + "月" + parseInt(p[2], 10) + "日";
+  }
+
+  function gameFacts(e) {
+    var g = e.game;
+    var status = g.future
+      ? '<span style="color:var(--blood-bright);font-weight:700">即将终止</span>'
+      : '<span style="color:var(--parchment-mute)">已终止</span>';
+
+    var h = '<div class="facts">' +
+      fact("运营期间", isoLabel(g.start) + " ～ " + isoLabel(g.end)) +
+      fact("运营天数", g.days.toLocaleString() + " 日（约 " + (g.days / 365.25).toFixed(1) + " 年）") +
+      fact("开发 / 运营", g.company) +
+      fact("当前状态", status, true) +
+      fact("停服月份", monthLabel(monthKey(e))) +
+    "</div>";
+
+    if (g.link) {
+      h += '<a class="ext-link" href="' + esc(g.link) + '" target="_blank" rel="noopener">' +
+           "↗ 前往本条目的原始记录（apps-island）</a>";
+    }
+    h += '<a class="ext-link" href="' + esc(DATA.meta.source) + '" target="_blank" rel="noopener">' +
+         "↗ 查看完整停服名录来源</a>";
+    return h;
+  }
+
+  function fact(k, v, raw) {
+    return '<div class="fact"><span class="fk">' + esc(k) + "</span>" +
+           '<span class="fv">' + (raw ? v : esc(v)) + "</span></div>";
   }
 
   function notFound() {
@@ -349,12 +596,28 @@
       return { view: "detail", id: decodeURIComponent(parts[1]) };
     }
     if (parts[0] === "cat" && parts[1]) {
-      return { view: "browse", category: decodeURIComponent(parts[1]), tag: null };
+      return { view: "browse", category: decodeURIComponent(parts[1]), tag: null, month: null, company: null };
+    }
+    if (parts[0] === "month" && parts[1]) {
+      var mo = decodeURIComponent(parts[1]);
+      return {
+        view: "browse",
+        category: mo === "__upcoming__" ? GAME_CAT : "all",
+        month: mo, tag: null, company: null
+      };
+    }
+    if (parts[0] === "company" && parts[1]) {
+      return {
+        view: "browse", category: GAME_CAT,
+        company: decodeURIComponent(parts[1]), month: null, tag: null
+      };
     }
     if (parts[0] === "tag" && parts[1]) {
-      return { view: "browse", category: "all", tag: decodeURIComponent(parts[1]) };
+      return { view: "browse", category: "all", tag: decodeURIComponent(parts[1]), month: null, company: null };
     }
-    if (parts[0] === "browse") return { view: "browse", category: "all", tag: null };
+    if (parts[0] === "browse") {
+      return { view: "browse", category: "all", tag: null, month: null, company: null };
+    }
     return { view: "home" };
   }
 
@@ -366,10 +629,14 @@
     } else if (r.view === "browse") {
       if (r.category !== undefined) state.category = r.category;
       if (r.tag !== undefined) state.tag = r.tag;
+      if (r.month !== undefined) state.month = r.month;
+      if (r.company !== undefined) state.company = r.company;
       viewBrowse();
     } else {
       state.category = "all";
       state.tag = null;
+      state.month = null;
+      state.company = null;
       viewHome();
     }
     renderSidebar();
@@ -393,6 +660,20 @@
       });
     });
 
+    /* month chips inside main (detail meta + month strip) */
+    el.main.querySelectorAll("[data-month]").forEach(function (node) {
+      node.addEventListener("click", function () {
+        location.hash = "#/month/" + encodeURIComponent(node.dataset.month);
+      });
+    });
+
+    /* company chips */
+    el.main.querySelectorAll("[data-company]").forEach(function (node) {
+      node.addEventListener("click", function () {
+        location.hash = "#/company/" + encodeURIComponent(node.dataset.company);
+      });
+    });
+
     /* sort */
     var sortSel = document.getElementById("sortSelect");
     if (sortSel) {
@@ -409,6 +690,8 @@
       clear.addEventListener("click", function () {
         state.tag = null;
         state.query = "";
+        state.month = null;
+        state.company = null;
         el.search.value = "";
         location.hash = "#/browse";
       });
@@ -425,9 +708,19 @@
   /* ---------- sidebar events (bound once) ---------- */
   function bindSidebar() {
     el.catNav.addEventListener("click", function (ev) {
+      var sub = ev.target.closest(".subnav-item");
+      if (sub) {
+        var mo = sub.dataset.month;
+        location.hash = mo === "" ? "#/cat/" + GAME_CAT
+                                 : "#/month/" + encodeURIComponent(mo);
+        closeSidebar();
+        return;
+      }
       var row = ev.target.closest(".nav-item");
       if (!row) return;
       state.tag = null;
+      state.month = null;
+      state.company = null;
       var id = row.dataset.cat;
       location.hash = id === "all" ? "#/browse" : "#/cat/" + encodeURIComponent(id);
       closeSidebar();
@@ -449,6 +742,8 @@
       t = setTimeout(function () {
         state.query = el.search.value;
         state.tag = null;
+        state.month = null;
+        state.company = null;
         if (state.view !== "browse") {
           state.category = "all";
           location.hash = "#/browse";
@@ -502,7 +797,7 @@
   /* ---------- random entry ---------- */
   function bindRandom() {
     el.randomBtn.addEventListener("click", function () {
-      var pool = DATA.entries;
+      var pool = gameEntries();
       var pick = pool[Math.floor(Math.random() * pool.length)];
       location.hash = "#/entry/" + encodeURIComponent(pick.id);
     });
