@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>野人遗产库 · The Savage Legacy Archive</title>
+<meta name="description" content="野人遗产库——收录荒原纪元以来散落于世的怪物图鉴、遗物志、秘术残章与失落之地。">
+<meta name="theme-color" content="#13100c">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="野人遗产库 · The Savage Legacy Archive">
+<meta property="og:description" content="残卷纪年 · 一切归于尘土的,终将被再次拾起">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2313100c'/%3E%3Ctext x='16' y='23' font-size='20' text-anchor='middle' fill='%23c9a227'%3E%E7%87%8E%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <button class="icon-btn menu-toggle" id="menuToggle" aria-label="打开目录">☰</button>
+
+  <a class="brand" href="#/" id="brandLink">
+    <span class="brand-mark">野</span>
+    <span class="brand-text">
+      <span class="brand-name">野人遗产库</span>
+      <span class="brand-sub">Savage Legacy Archive</span>
+    </span>
+  </a>
+
+  <div class="searchbox">
+    <span class="icon">🔍</span>
+    <input type="search" id="searchInput" placeholder="搜索图鉴条目、标签、地名……" autocomplete="off" spellcheck="false">
+    <kbd>/</kbd>
+  </div>
+
+  <div class="header-actions">
+    <button class="icon-btn" id="randomBtn" title="随机翻一页">🎲</button>
+    <button class="icon-btn" id="themaBtn" title="关于遗产库">ℹ</button>
+  </div>
+</header>
+
+<div class="backdrop" id="backdrop"></div>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <nav class="nav-group">
+      <div class="nav-title">典藏分类</div>
+      <div id="categoryNav"></div>
+    </nav>
+    <nav class="nav-group">
+      <div class="nav-title">常见标签</div>
+      <div class="tag-cloud" id="tagCloud"></div>
+    </nav>
+  </aside>
+
+  <main class="main" id="main"></main>
+</div>
+
+<footer class="site-footer">
+  <div>野人遗产库 · The Savage Legacy Archive</div>
+  <div class="sig">残卷纪年 · 凡所记,皆为遗产</div>
+</footer>
+
+<script src="assets/js/app.js"></script>
+</body>
+</html>

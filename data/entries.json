@@ -1,0 +1,407 @@
+{
+  "meta": {
+    "title": "野人遗产库",
+    "subtitle": "The Savage Legacy Archive",
+    "tagline": "残卷纪年 · 一切归于尘土的,终将被再次拾起",
+    "intro": "此地收录着荒原纪元以来散落于世的怪物图鉴、遗物志、秘术残章与失落之地。每一份条目,皆是前人以身涉险换回的只言片语。翻阅者须知——遗产从不温驯。"
+  },
+  "categories": [
+    { "id": "bestiary", "name": "怪物图鉴", "en": "Bestiary",       "glyph": "🐺", "desc": "荒原与深渊中的活物与死物" },
+    { "id": "relic",    "name": "遗物志",   "en": "Relics",         "glyph": "⚔", "desc": "从废墟中掘出的武器与器物" },
+    { "id": "arcane",   "name": "秘术残章", "en": "Arcane Fragments","glyph": "✦", "desc": "被禁止传抄的法术与仪式" },
+    { "id": "region",   "name": "失落之地", "en": "Lost Regions",  "glyph": "⛰", "desc": "地图边缘之外的地貌与遗迹" },
+    { "id": "figure",   "name": "人物志",   "en": "Figures",        "glyph": "☠", "desc": "留下名字或没留下名字的人" },
+    { "id": "chronicle","name": "纪年残卷", "en": "Chronicles",     "glyph": "📜", "desc": "跨越纪元的战争与灾变记录" }
+  ],
+  "entries": [
+    {
+      "id": "bonegnasher",
+      "name": "噬骨者",
+      "en": "Bonegnasher",
+      "category": "bestiary",
+      "rarity": "legendary",
+      "glyph": "🦴",
+      "tags": ["荒原", "不死", "群体"],
+      "desc": "以枯骨为食、以死者之骨增生躯壳的荒原猎食者。孤身时懦弱,结群时无畏。",
+      "lore": [
+        "噬骨者并非天生不死。荒原纪年第七百三十载,一支商队在盐水沼泽尽头的枯骨谷扎营。当夜无人存活,而次日清晨,营地里站起来的东西已经不认得人形了。",
+        "它们啃食同类的骨骼来修补自己开裂的躯壳——越吃越庞大,越庞大越难被击倒。老练的猎人会说:别追单只的噬骨者,追它回巢,你会找到它已经长大到不需要逃跑的理由。"
+      ],
+      "stats": [
+        { "label": "威胁等级", "value": 82 },
+        { "label": "群体性",   "value": 94 },
+        { "label": "再生能力", "value": 66 },
+        { "label": "智慧",     "value": 28 },
+        { "label": "抗打击",   "value": 77 }
+      ],
+      "weakness": "圣银锻打的钝器;骨骼接缝处",
+      "drops": ["增生骨板", "腐化的骨髓", "噬骨者的獠牙"],
+      "habitat": "盐水沼泽 · 枯骨谷",
+      "related": ["hollowmantle", "embercolossus"]
+    },
+    {
+      "id": "hollowmantle",
+      "name": "空壳斗篷",
+      "en": "Hollowmantle",
+      "category": "bestiary",
+      "rarity": "rare",
+      "glyph": "👻",
+      "tags": ["夜间", "幽影", "独居"],
+      "desc": "一件无人穿着的斗篷,在夜里自己走。它寻找一个肩膀来归还——通常是在你还活着的时候。",
+      "lore": [
+        "空壳斗篷据说是被处决的刽子手的遗物。行刑者割下的头颅太多,某一天,他披着的那件斗篷开始替他继续工作。",
+        "遇到它时不要奔跑。奔跑意味着你有体温,有体温意味着你合适。低下头,闭上眼,让它自己走过去。"
+      ],
+      "stats": [
+        { "label": "威胁等级", "value": 58 },
+        { "label": "群体性",   "value": 12 },
+        { "label": "再生能力", "value": 41 },
+        { "label": "智慧",     "value": 63 },
+        { "label": "隐匿性",   "value": 91 }
+      ],
+      "weakness": "明火;被念出真名时",
+      "drops": ["褪色的布片", "刽子手的线"],
+      "habitat": "旧刑场 · 荒村",
+      "related": ["bonegnasher", "therustedpang"]
+    },
+    {
+      "id": "embercolossus",
+      "name": "余烬巨像",
+      "en": "Ember Colossus",
+      "category": "bestiary",
+      "rarity": "mythic",
+      "glyph": "🔥",
+      "tags": ["火山", "远古", "构造体"],
+      "desc": "沉睡在熔岩海中的远古构造物。它醒来不是为了征服,只是翻了个身。",
+      "lore": [
+        "余烬巨像诞生于第一纪元的锻火之中,那时匠人们还未学会给武器起名字。它没有意识,只有记忆——一整座焚烧过的城市的记忆。",
+        "记录者称,巨像每一次移动,大陆的某处就会多出一座火山。这或许只是巧合。愿它只是巧合。"
+      ],
+      "stats": [
+        { "label": "威胁等级", "value": 100 },
+        { "label": "群体性",   "value": 0 },
+        { "label": "再生能力", "value": 88 },
+        { "label": "智慧",     "value": 8 },
+        { "label": "破坏力",   "value": 100 }
+      ],
+      "weakness": "无已知弱点;唯一的记录是『不要唤醒它』",
+      "drops": ["熔核残片", "第一纪元的锻火"],
+      "habitat": "熔岩海 · 焚风裂谷",
+      "related": ["ashencodex", "bonegnasher"]
+    },
+    {
+      "id": "saltwidow",
+      "name": "盐沼寡妇",
+      "en": "Salt Widow",
+      "category": "bestiary",
+      "rarity": "epic",
+      "glyph": "🕷",
+      "tags": ["湿地", "剧毒", "陷阱"],
+      "desc": "在盐滩下织网的巨大节肢猎手。它的网不粘,它让猎物自己踩进干涸的盐壳裂缝里。",
+      "lore": [
+        "盐沼寡妇从不结出看得见的网。它在退潮的盐滩下挖掘迷宫般的隧道,然后用薄薄的盐壳封顶。旅人走着走着,脚下的世界就碎了。",
+        "捕获到的寡妇腹中常见完整的人形轮廓——被盐腌渍,被时间风干,保存得比任何棺椁都好。"
+      ],
+      "stats": [
+        { "label": "威胁等级", "value": 71 },
+        { "label": "群体性",   "value": 34 },
+        { "label": "毒性",     "value": 89 },
+        { "label": "智慧",     "value": 47 },
+        { "label": "隐匿性",   "value": 85 }
+      ],
+      "weakness": "干燥的强光;移除盐壳暴露巢穴",
+      "drops": ["寡妇毒腺", "盐晶甲壳"],
+      "habitat": "白盐滩 · 退潮带",
+      "related": ["bonegnasher", "gloamroot"]
+    },
+    {
+      "id": "gloamroot",
+      "name": "幽根行者",
+      "en": "Gloamroot Walker",
+      "category": "bestiary",
+      "rarity": "uncommon",
+      "glyph": "🌿",
+      "tags": ["森林", "植物", "伪装"],
+      "desc": "一棵会走路的枯树。它不追你,它只是在你必经的路上,慢慢地,站到那里。",
+      "lore": [
+        "幽根行者曾被误认为是一片死林。直到有一位测绘员发现,同一个地方,昨天有十二棵树,今天有十三棵。",
+        "它没有眼睛,靠根系感知大地的震动。安静地走,或许能过去。但没人在意它是不是想让你过去。"
+      ],
+      "stats": [
+        { "label": "威胁等级", "value": 39 },
+        { "label": "群体性",   "value": 22 },
+        { "label": "再生能力", "value": 74 },
+        { "label": "智慧",     "value": 15 },
+        { "label": "隐匿性",   "value": 96 }
+      ],
+      "weakness": "斧;火",
+      "drops": ["幽根木心", "活着的树皮"],
+      "habitat": "灰雾林 · 所有标错位置的林地",
+      "related": ["saltwidow", "therustedpang"]
+    },
+    {
+      "id": "ashencodex",
+      "name": "灰烬法典",
+      "en": "The Ashen Codex",
+      "category": "relic",
+      "rarity": "mythic",
+      "glyph": "📕",
+      "tags": ["禁书", "第一纪元", "诅咒"],
+      "desc": "记载第一纪元所有失落法术的书。翻到最后一页的人,会变成书的一部分。",
+      "lore": [
+        "灰烬法典没有封面,只有从灰烬中重新聚集起来的书页。每一页都是某位读者的结局。",
+        "它不能被摧毁——你能烧掉纸张,但灰烬仍在。第二天,灰烬会重新装订成册,只是又多了一页。"
+      ],
+      "stats": [
+        { "label": "稀有度", "value": 100 },
+        { "label": "危险性", "value": 97 },
+        { "label": "知识量", "value": 99 },
+        { "label": "传抄难度", "value": 100 }
+      ],
+      "weakness": "无;据说不读它就行",
+      "drops": [],
+      "habitat": "余烬巨像的灰烬之中",
+      "related": ["embercolossus", "whisperlamp"]
+    },
+    {
+      "id": "therustedpang",
+      "name": "锈蚀之痛",
+      "en": "The Rusted Pang",
+      "category": "relic",
+      "rarity": "epic",
+      "glyph": "🗡",
+      "tags": ["剑", "诅咒", "自我"],
+      "desc": "一柄生了锈的短剑。每次挥舞,持有者身上会多出一道旧伤疤——像是这把剑在回忆自己的战绩。",
+      "lore": [
+        "锈蚀之痛属于一位无名剑士。他一生战无不胜,却从未承认过任何一场胜利。临终时他折断了自己的剑,于是剑开始替他记住疼痛。",
+        "持剑者能获得前任所有者的战斗本能,代价是:你会逐渐分不清哪些伤是别人的,哪些是自己的。"
+      ],
+      "stats": [
+        { "label": "伤害",   "value": 78 },
+        { "label": "速度",   "value": 85 },
+        { "label": "稳定性", "value": 34 },
+        { "label": "诅咒度", "value": 88 }
+      ],
+      "weakness": "持有者的悔意",
+      "drops": [],
+      "habitat": "无名剑士之墓 · 位置不详",
+      "related": ["hollowmantle", "whisperlamp"]
+    },
+    {
+      "id": "whisperlamp",
+      "name": "低语之灯",
+      "en": "Whisper Lamp",
+      "category": "relic",
+      "rarity": "rare",
+      "glyph": "🏮",
+      "tags": ["照明", "亡灵", "交易"],
+      "desc": "点亮时,灯焰会低声说话。它告诉你最近的墓在哪里——那通常是你自己的。",
+      "lore": [
+        "低语之灯的光只照见死者最后站立的地方。持有者据此能找到遗物,也能找到自己未来的位置。",
+        "许多持有者在灯焰里看到了自己的名字,刻在一块还没做好的墓碑上。他们大多把灯丢进了河里。灯会回来,通常是在第二天早上,放在门口。"
+      ],
+      "stats": [
+        { "label": "照明",   "value": 72 },
+        { "label": "指引",   "value": 90 },
+        { "label": "危险性", "value": 61 },
+        { "label": "稀有度", "value": 55 }
+      ],
+      "weakness": "泼出的圣水;被归还给亡者时",
+      "drops": [],
+      "habitat": "各处坟场 · 沉河的灯",
+      "related": ["therustedpang", "ashencodex"]
+    },
+    {
+      "id": "sanguinevigil",
+      "name": "血誓残章",
+      "en": "Fragment of the Sanguine Vigil",
+      "category": "arcane",
+      "rarity": "legendary",
+      "glyph": "🩸",
+      "tags": ["血魔法", "契约", "禁术"],
+      "desc": "以自身血液为代价,让伤口替自己战斗的秘术。施术者越接近死亡,战力越强。",
+      "lore": [
+        "血誓从不写在纸上,而是刻在施术者的血管里。传抄它的人,血管会自己开始书写。",
+        "残章只有开头与结尾,中间的仪式部分已被撕去。据传撕去它的正是创立此术的人——她认为,中间部分不该被任何人学会。"
+      ],
+      "stats": [
+        { "label": "威力",     "value": 92 },
+        { "label": "代价",     "value": 96 },
+        { "label": "稳定性",   "value": 40 },
+        { "label": "禁忌等级", "value": 99 }
+      ],
+      "weakness": "施术者的失血",
+      "drops": ["血誓印记"],
+      "habitat": "传抄于地下秘教 · 原件已毁",
+      "related": ["ashencodex", "echoofnames"]
+    },
+    {
+      "id": "echoofnames",
+      "name": "唤名术",
+      "en": "Echo of Names",
+      "category": "arcane",
+      "rarity": "uncommon",
+      "glyph": "🔊",
+      "tags": ["真名", "驱散", "基础"],
+      "desc": "念出事物的真名,使其现出原形。对无名之物无效——而荒原上大多数东西,都没有名字。",
+      "lore": [
+        "这是所有秘术里入门门槛最低的一个,也是最没用处的一个。因为要念出真名,你得先知道真名。",
+        "少数派学者坚持:唤名术的真正用途不是对付怪物,而是对付人。人一旦被念出真名,就再也无法假装自己是别人。"
+      ],
+      "stats": [
+        { "label": "威力",   "value": 31 },
+        { "label": "实用性", "value": 44 },
+        { "label": "代价",   "value": 12 },
+        { "label": "流传度", "value": 88 }
+      ],
+      "weakness": "无号之物",
+      "drops": [],
+      "habitat": "各地学院 · 公开传抄",
+      "related": ["sanguinevigil", "hollowmantle"]
+    },
+    {
+      "id": "glassweep",
+      "name": "玻璃之泣",
+      "en": "The Glass Weep",
+      "category": "region",
+      "rarity": "epic",
+      "glyph": "🏔",
+      "tags": ["山脉", "晶体", "回声"],
+      "desc": "整座山脉都是凝固的玻璃。风穿过时会哭,当地人说那是第一次崩裂时留下的声音。",
+      "lore": [
+        "玻璃之泣曾是一座普通的山。第一纪元末,一场未被记录的灾变把整座山连同其上的城市烧成了玻璃。",
+        "山谷像一面巨大的镜子,映出的是每个走过它的人最不愿被看见的样子。有人因此转身返回,有人因此再也没走出来。"
+      ],
+      "stats": [
+        { "label": "危险程度", "value": 68 },
+        { "label": "可探索度", "value": 55 },
+        { "label": "资源价值", "value": 82 },
+        { "label": "迷失风险", "value": 93 }
+      ],
+      "weakness": "",
+      "drops": ["哭泣的玻璃", "凝固的城市"],
+      "habitat": "地图东北 · 玻璃之泣山脉",
+      "related": ["embercolossus", "sunkenstair"]
+    },
+    {
+      "id": "sunkenstair",
+      "name": "沉没阶梯",
+      "en": "The Sunken Stair",
+      "category": "region",
+      "rarity": "rare",
+      "glyph": "🪜",
+      "tags": ["水下", "遗迹", "未知"],
+      "desc": "一道自海底升起的阶梯,永远向上,永不到顶。它通向哪里无人知晓——因为没人能爬上第一千级。",
+      "lore": [
+        "沉没阶梯在退潮时露出水面约三百级,涨潮时没入海中。潜入水下的人报告说,阶梯在水下仍在继续,延伸到无光的深处。",
+        "有记录者曾绑着绳索向下潜,绳索用尽了阶梯还没到头。他上来时只说了一句话:`它在往下长,不是往上。`"
+      ],
+      "stats": [
+        { "label": "危险程度", "value": 74 },
+        { "label": "可探索度", "value": 31 },
+        { "label": "资源价值", "value": 66 },
+        { "label": "未知程度", "value": 99 }
+      ],
+      "weakness": "",
+      "drops": ["海底的刻痕", "无光的石阶"],
+      "habitat": "东南海域 · 断潮湾",
+      "related": ["glassweep", "echoofnames"]
+    },
+    {
+      "id": "marlowe",
+      "name": "无名的测绘员",
+      "en": "The Unnamed Cartographer",
+      "category": "figure",
+      "rarity": "legendary",
+      "glyph": "🧭",
+      "tags": ["学者", "失踪", "遗产库"],
+      "desc": "遗产库最初的编纂者。他走遍了所有标错的地图边缘,最后把自己也标了上去,再没有回来。",
+      "lore": [
+        "他留下了一千零四十七页测绘手稿,以及一句话:`所有地图的空白处,都站着一个不肯离开的人。`",
+        "遗产库中超过三成的条目出自他的记录。他自己却没有条目——直到后来者为他补上了这一页。"
+      ],
+      "stats": [
+        { "label": "学识",     "value": 96 },
+        { "label": "勇气",     "value": 88 },
+        { "label": "留下记录", "value": 100 },
+        { "label": "归来概率", "value": 0 }
+      ],
+      "weakness": "他自己从不记录弱点",
+      "drops": ["测绘手稿", "最后一张地图"],
+      "habitat": "未知 · 最后出现于玻璃之泣",
+      "related": ["glassweep", "bonegnasher"]
+    },
+    {
+      "id": "ashenqueen",
+      "name": "灰烬女王",
+      "en": "The Ashen Queen",
+      "category": "figure",
+      "rarity": "mythic",
+      "glyph": "👑",
+      "tags": ["统治者", "第一纪元", "陨落"],
+      "desc": "统一了荒原的最后一任君主,也是亲手点燃荒原的人。她想留下遗产,结果只留下了灰烬。",
+      "lore": [
+        "她统治的四十年被称为`最长的和平`。而和平的代价,是她烧掉了所有可能威胁这份和平的东西——包括土地,包括人民,包括她自己的名字。",
+        "灰烬法典据说是她临终前写的悔书。没人能读完它,因为她把每一页都变成了灰。"
+      ],
+      "stats": [
+        { "label": "权势",     "value": 100 },
+        { "label": "残酷度",   "value": 95 },
+        { "label": "遗产破坏", "value": 98 },
+        { "label": "被铭记",   "value": 42 }
+      ],
+      "weakness": "悔意",
+      "drops": ["灰烬王冠", "未燃尽的手谕"],
+      "habitat": "第一纪元 · 焚荒之地",
+      "related": ["ashencodex", "embercolossus"]
+    },
+    {
+      "id": "thegreatburning",
+      "name": "大焚纪",
+      "en": "The Great Burning",
+      "category": "chronicle",
+      "rarity": "legendary",
+      "glyph": "🔥",
+      "tags": ["灾变", "第一纪元", "终结"],
+      "desc": "第一纪元终结于此。一场由灰烬女王点燃、由余烬巨像完成的大火,烧尽了记载中几乎所有的城邦。",
+      "lore": [
+        "关于大焚纪的记载互相矛盾:有的说火是女王放的,有的说是地火自己涌上来,有的说根本没有火——是所有人同时开始遗忘。",
+        "可以确认的是:大焚纪之后,绘图师重新开始在地图上画空白。因为没人记得原来那里画了什么。"
+      ],
+      "stats": [
+        { "label": "波及范围", "value": 100 },
+        { "label": "死亡人数", "value": 97 },
+        { "label": "记载可信度", "value": 28 },
+        { "label": "纪元影响力", "value": 100 }
+      ],
+      "weakness": "",
+      "drops": ["灰烬层", "断代的铭文"],
+      "habitat": "第一纪元末 · 全境",
+      "related": ["ashenqueen", "embercolossus"]
+    },
+    {
+      "id": "thequietdecades",
+      "name": "静默年代",
+      "en": "The Quiet Decades",
+      "category": "chronicle",
+      "rarity": "uncommon",
+      "glyph": "🔇",
+      "tags": ["第二纪元", "休止", "谜团"],
+      "desc": "大焚纪之后的两百年。没有战争,没有建城,没有记录。这两百年像是被谁从史书里剪掉了。",
+      "lore": [
+        "现存的史料中,第二纪元的前两百年只有固定的四个字:`无有所载。`抄本、拓片、口述,全都一样。",
+        "有学者提出最可怕的可能:不是没有事情发生,而是所有人都被教会了不去记录。这需要多大的力气,没人敢算。"
+      ],
+      "stats": [
+        { "label": "时长",     "value": 62 },
+        { "label": "记载可信度", "value": 5 },
+        { "label": "事件密度", "value": 3 },
+        { "label": "谜团程度", "value": 94 }
+      ],
+      "weakness": "",
+      "drops": ["空白抄本"],
+      "habitat": "第二纪元 · 无有所载",
+      "related": ["thegreatburning", "echoofnames"]
+    }
+  ]
+}
