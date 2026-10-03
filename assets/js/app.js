@@ -23,6 +23,35 @@
 
   var GAME_CAT = "relic";
 
+  /* ------------------------------------------------------------
+     封面图来源开关
+     -----------------------------------------
+     "local"  → 用仓库内的 assets/img/covers/*(离线可用,但新增游戏要补图)
+     "remote" → 用 data 里的 remoteImg 直链(零维护,但依赖原站)
+     "auto"   → 先试本地,加载失败自动回退到远程(推荐)
+     ------------------------------------------------------------ */
+  var IMG_MODE = "auto";
+
+  function imgSrc(e) {
+    if (!isGame(e)) return "";
+    var local = e.game.img || "";
+    var remote = e.game.remoteImg || "";
+    if (IMG_MODE === "remote") return remote || local;
+    if (IMG_MODE === "local") return local || remote;
+    return local || remote;                 /* auto: 优先本地 */
+  }
+
+  function imgFallback(e) {
+    if (!isGame(e)) return "";
+    var local = e.game.img || "";
+    var remote = e.game.remoteImg || "";
+    if (IMG_MODE === "auto") {
+      /* 本地挂了 → 回退远程;远程挂了 → 空(显示字形) */
+      return local && remote ? remote : "";
+    }
+    return "";
+  }
+
   function isGame(e) { return !!e.game; }
 
   var el = {
@@ -225,12 +254,15 @@
     var c = catOf(e.category);
     var delay = Math.min(idx * 30, 400);
     var isG = isGame(e);
+    var src = isG ? imgSrc(e) : "";
+    var fb = isG ? imgFallback(e) : "";
 
     var art;
-    if (isG && e.game.img) {
+    if (isG && src) {
       art = '<div class="card-art game-art">' +
-              '<img src="' + esc(e.game.img) + '" alt="' + esc(e.name) + '" loading="lazy" ' +
-                   'onerror="this.parentNode.classList.add(\'img-fail\');this.remove()">' +
+              '<img src="' + esc(src) + '" alt="' + esc(e.name) + '" loading="lazy" ' +
+                   'data-fb="' + esc(fb) + '" ' +
+                   'onerror="if(this.dataset.fb){this.src=this.dataset.fb;this.dataset.fb=0;}else{this.parentNode.classList.add(\'img-fail\');this.remove();}">' +
               '<span class="glyph">' + esc(e.glyph) + "</span>" +
             "</div>";
     } else {
@@ -447,10 +479,13 @@
       '<span class="sep">/</span><span>' + esc(e.name) + "</span>" +
     "</nav>";
 
-    var detailArt = (isG && e.game.img)
+    var detailSrc = isG ? imgSrc(e) : "";
+    var detailFb  = isG ? imgFallback(e) : "";
+    var detailArt = (isG && detailSrc)
       ? '<div class="detail-art game-art">' +
-          '<img src="' + esc(e.game.img) + '" alt="' + esc(e.name) + '" ' +
-               'onerror="this.parentNode.classList.add(\'img-fail\');this.remove()">' +
+          '<img src="' + esc(detailSrc) + '" alt="' + esc(e.name) + '" ' +
+               'data-fb="' + esc(detailFb) + '" ' +
+               'onerror="if(this.dataset.fb){this.src=this.dataset.fb;this.dataset.fb=0;}else{this.parentNode.classList.add(\'img-fail\');this.remove();}">' +
           '<span class="glyph">' + esc(e.glyph) + "</span></div>"
       : '<div class="detail-art"><span class="glyph">' + esc(e.glyph) + "</span></div>";
 
@@ -794,6 +829,32 @@
     el.backdrop.addEventListener("click", closeSidebar);
   }
 
+  /* ---------- 封面图来源切换 ---------- */
+  var IMG_MODE_LABEL = { auto: "自动(本地→远程)", local: "仅本地", remote: "仅远程直链" };
+
+  function loadImgMode() {
+    try {
+      var v = localStorage.getItem("wl_imgmode");
+      if (v === "local" || v === "remote" || v === "auto") IMG_MODE = v;
+    } catch (e) { /* ignore */ }
+  }
+
+  function bindImgMode() {
+    var btn = document.getElementById("imgModeBtn");
+    if (!btn) return;
+    btn.title = "封面图来源:" + IMG_MODE_LABEL[IMG_MODE] + "(点击切换)";
+    btn.style.color = IMG_MODE === "remote" ? "var(--arcane)" : "";
+
+    btn.addEventListener("click", function () {
+      var order = ["auto", "remote", "local"];
+      IMG_MODE = order[(order.indexOf(IMG_MODE) + 1) % order.length];
+      try { localStorage.setItem("wl_imgmode", IMG_MODE); } catch (e) {}
+      btn.title = "封面图来源:" + IMG_MODE_LABEL[IMG_MODE] + "(点击切换)";
+      btn.style.color = IMG_MODE === "remote" ? "var(--arcane)" : "";
+      render();     /* 立即重绘,切换效果可见 */
+    });
+  }
+
   /* ---------- random entry ---------- */
   function bindRandom() {
     el.randomBtn.addEventListener("click", function () {
@@ -828,10 +889,12 @@
       })
       .then(function (json) {
         DATA = json;
+        loadImgMode();
         bindSidebar();
         bindSearch();
         bindKeys();
         bindMobile();
+        bindImgMode();
         bindRandom();
         bindAbout();
         window.addEventListener("hashchange", render);
