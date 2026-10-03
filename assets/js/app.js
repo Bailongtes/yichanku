@@ -206,7 +206,7 @@
     DATA.categories.forEach(function (c) {
       html += navRow(c.id, c.name, c.glyph, countCat(c.id));
 
-      /* 停服游戏展开:按月细分 */
+      /* 遗物志展开:停服游戏按月细分 */
       if (c.id === GAME_CAT) {
         var months = gameMonths();
         var upcoming = upcomingGames().length;
@@ -306,7 +306,7 @@
       "<h1>" + esc(m.title) + "</h1>" +
       "<p>" + esc(m.intro) + "</p>" +
       '<div class="hero-stats">' +
-        stat(games.length, "停服游戏") +
+        stat(games.length, "遗物 · 停服游戏") +
         stat(upcoming.length, "即将停服") +
         stat(months.length, "停服月份") +
         stat(DATA.entries.length, "收录条目") +
