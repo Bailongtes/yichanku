@@ -608,10 +608,6 @@
       fact("停服月份", monthLabel(monthKey(e))) +
     "</div>";
 
-    if (g.link) {
-      h += '<a class="ext-link" href="' + esc(g.link) + '" target="_blank" rel="noopener">' +
-           "↗ 前往本条目的原始记录（apps-island）</a>";
-    }
     return h;
   }
 
