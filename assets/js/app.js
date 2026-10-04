@@ -33,7 +33,7 @@
   var IMG_MODE = "auto";
 
   function imgSrc(e) {
-    if (!isGame(e)) return "";
+    if (!isGame(e)) return e.icon || (e.game && e.game.remoteImg) || "";
     var local = e.game.img || "";
     var remote = e.game.remoteImg || "";
     if (IMG_MODE === "remote") return remote || local;
@@ -52,7 +52,13 @@
     return "";
   }
 
-  function isGame(e) { return !!e.game; }
+  /* 判定"真"停服游戏条目:game 对象里至少要有日期或厂商。
+     后台编辑器会给任意条目补全空的 game 对象(仅存 remoteImg 用),
+     这种"只挂图"的条目按普通条目处理,不进月份/厂商管线。 */
+  function isGame(e) {
+    var g = e.game;
+    return !!g && !!(g.start || g.end || g.company || g.endYear || g.endMonth);
+  }
 
   var el = {
     main:       document.getElementById("main"),
@@ -254,11 +260,11 @@
     var c = catOf(e.category);
     var delay = Math.min(idx * 30, 400);
     var isG = isGame(e);
-    var src = isG ? imgSrc(e) : "";
-    var fb = isG ? imgFallback(e) : "";
+    var src = imgSrc(e);
+    var fb = imgFallback(e);
 
     var art;
-    if (isG && src) {
+    if (src) {
       art = '<div class="card-art game-art">' +
               '<img src="' + esc(src) + '" alt="' + esc(e.name) + '" loading="lazy" ' +
                    'data-fb="' + esc(fb) + '" ' +
@@ -479,9 +485,9 @@
       '<span class="sep">/</span><span>' + esc(e.name) + "</span>" +
     "</nav>";
 
-    var detailSrc = isG ? imgSrc(e) : "";
-    var detailFb  = isG ? imgFallback(e) : "";
-    var detailArt = (isG && detailSrc)
+    var detailSrc = imgSrc(e);
+    var detailFb  = imgFallback(e);
+    var detailArt = detailSrc
       ? '<div class="detail-art game-art">' +
           '<img src="' + esc(detailSrc) + '" alt="' + esc(e.name) + '" ' +
                'data-fb="' + esc(detailFb) + '" ' +
@@ -606,8 +612,6 @@
       h += '<a class="ext-link" href="' + esc(g.link) + '" target="_blank" rel="noopener">' +
            "↗ 前往本条目的原始记录（apps-island）</a>";
     }
-    h += '<a class="ext-link" href="' + esc(DATA.meta.source) + '" target="_blank" rel="noopener">' +
-         "↗ 查看完整停服名录来源</a>";
     return h;
   }
 
