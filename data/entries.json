@@ -17,10 +17,10 @@
     },
     {
       "id": "relic",
-      "name": "停服游戏",
-      "en": "Discontinued Games",
-      "glyph": "🎮",
-      "desc": "2025年至今已停服、及即将停服的手机游戏"
+      "name": "遗物志",
+      "en": "Relics",
+      "glyph": "⚔",
+      "desc": "从废墟中掘出的武器与器物 · 附停服游戏名录"
     },
     {
       "id": "arcane",
