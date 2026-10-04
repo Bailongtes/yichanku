@@ -394,6 +394,121 @@
       ]
     },
     {
+      "id": "prototype2",
+      "name": "虐杀原形2",
+      "en": "PROTOTYPE 2",
+      "category": "arcane",
+      "rarity": "legendary",
+      "glyph": "🧬",
+      "icon": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/115320/header.jpg?t=1655761001",
+      "tags": [
+        "病毒",
+        "吞噬",
+        "变形"
+      ],
+      "desc": "黑光病毒与人血融合而成的活体秘术。习得者可吞噬同类夺取其形貌与记忆,每一次进食都是一次献祭,每一次变形都是一次重生。",
+      "lore": [
+        "残章记载的不是法术,而是一个人的下落。原体将自己的躯体让渡给病毒,从此血肉即是咒文,城市即是祭坛。凡他所吞噬者,其力其形其忆,皆归他所有。",
+        "第二位习得者本是一名军人,妻女皆殁于疫区。他追杀赐予他力量的人,却在复仇的尽头明白:这卷残章从不挑人,它只是等着被续写。纽约废墟的风里至今还回荡着甲壳开裂的声音。"
+      ],
+      "stats": [
+        {
+          "label": "威力",
+          "value": 95
+        },
+        {
+          "label": "代价",
+          "value": 78
+        },
+        {
+          "label": "稳定性",
+          "value": 52
+        },
+        {
+          "label": "禁忌等级",
+          "value": 88
+        }
+      ],
+      "weakness": "生化抑制剂;同源的另一位原体",
+      "drops": [
+        "黑光病毒样本",
+        "吞噬者的甲壳",
+        "利刃鞭肢"
+      ],
+      "habitat": "纽约红区 · 疫变后的废墟",
+      "related": [
+        "sanguinevigil",
+        "bonegnasher"
+      ],
+      "game": {
+        "start": "",
+        "end": "",
+        "days": 0,
+        "company": "",
+        "link": "",
+        "img": "",
+        "remoteImg": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/115320/header.jpg?t=1655761001",
+        "future": false
+      }
+    },
+    {
+      "id": "codevein2",
+      "name": "CODE VEIN 噬血代码 II",
+      "en": "CODE VEIN II",
+      "category": "arcane",
+      "rarity": "mythic",
+      "glyph": "🕯",
+      "tags": [
+        "吸血鬼",
+        "时空回溯",
+        "血码"
+      ],
+      "desc": "以血为契、以时间为刃的还魂秘仪。习得者吸食敌者之血解锁「血码」,与心核相连的搭档同行,可重返百年之前,亲手改写既定的劫数。",
+      "lore": [
+        "残章开篇只有一句警告:「渴望之月升起时,不死者亦将失去名字。」果然,月轮一旦悬空,大多数吸血鬼便退化成只知撕咬的怪物——废土上残存的文明,就毁于这一次月相。",
+        "但残章真正的部分写的是回头路:一位猎人被少女以自己的心脏唤醒,二人结成心核之契,逆行百年光阴。每一次回溯都在磨损世界的接缝,每一份被改写的命运都要用另一份命运来偿。抄经人在末尾补了最后一行——血缚之人,共赴死地。"
+      ],
+      "stats": [
+        {
+          "label": "威力",
+          "value": 90
+        },
+        {
+          "label": "代价",
+          "value": 84
+        },
+        {
+          "label": "稳定性",
+          "value": 61
+        },
+        {
+          "label": "禁忌等级",
+          "value": 93
+        }
+      ],
+      "weakness": "渴望之月的相位;心核之契一旦断绝,回溯即告中断",
+      "drops": [
+        "血码残页",
+        "还魂的心核",
+        "绝对处刑者的剑痕"
+      ],
+      "habitat": "沉没都市 · 亡者之森 · 马格梅尔岛(百年之前与之后)",
+      "related": [
+        "prototype2",
+        "sanguinevigil"
+      ],
+      "game": {
+        "start": "",
+        "end": "",
+        "days": 0,
+        "company": "",
+        "link": "",
+        "img": "",
+        "remoteImg": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2362060/header.jpg",
+        "future": false
+      }
+    },
+    {
       "id": "glassweep",
       "name": "玻璃之泣",
       "en": "The Glass Weep",
