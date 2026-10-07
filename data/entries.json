@@ -446,7 +446,7 @@
         "days": 0,
         "company": "",
         "link": "",
-        "img": "",
+        "img": "assets/img/covers/000-1358af2e36a2.jpg",
         "remoteImg": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/115320/header.jpg?t=1655761001",
         "future": false
       }
@@ -14343,6 +14343,546 @@
         "endMonth": 1,
         "future": false
       }
+    },
+    {
+      "id": "elta",
+      "name": "艾尔塔:逆神",
+      "en": "Elta: Defy All Gods",
+      "category": "arcane",
+      "rarity": "legendary",
+      "glyph": "🐉",
+      "icon": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2659410/9a4ec4a02e82bb44b63003f86f971961231671b4/header_alt_assets_0_schinese.jpg?t=1790947256",
+      "byline": "Afterburner Studios 开发 · Focus Entertainment 发行 · 预定 2027 年 Q1",
+      "tags": [
+        "龙神",
+        "反抗诸神",
+        "契约"
+      ],
+      "desc": "与坠神缔结的逆神之契。堕落之神艾尔塔折断双翼后,将残存的神性封入契文,交由被选中的凡人。习得者牵一头龙形伴神,在被腐化蚕食的世界里开道——以不受拘束的近战劈开阻碍,以连贯的腾跃跨越险隘,直至站到诸神座前。",
+      "lore": [
+        "残章起首记着一场坠落:艾尔塔曾司掌天穹,因僭越而被诸神折翼,贬为腐化之源。它已无力再战,只能把神性从伤口里沥出来,封进契文,交到第一个肯应召的凡人手里。",
+        "此后每一页都是不同行路人的笔迹:谁被选中,谁牵着龙穿过腐土;谁在劈砍与腾跃之间学会——阻碍本身就是道路。抄经人在末页补了一行:「逆神者不需要神谕,他只需要一头肯与他并肩的龙。」"
+      ],
+      "stats": [
+        {
+          "label": "威力",
+          "value": 88
+        },
+        {
+          "label": "机动性",
+          "value": 92
+        },
+        {
+          "label": "代价",
+          "value": 70
+        },
+        {
+          "label": "禁忌等级",
+          "value": 85
+        }
+      ],
+      "weakness": "腐化之地的持续侵蚀;施术者与伴神失散后契约迅速衰减",
+      "drops": [
+        "龙形伴神的鳞片",
+        "逆神之契残页",
+        "被腐化者的核心"
+      ],
+      "habitat": "被腐化蚕食的科幻废土 · 神选之路",
+      "related": [
+        "codevein2",
+        "prototype2"
+      ],
+      "game": {
+        "start": "",
+        "end": "",
+        "days": 0,
+        "company": "",
+        "link": "",
+        "img": "",
+        "remoteImg": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2659410/9a4ec4a02e82bb44b63003f86f971961231671b4/header_alt_assets_0_schinese.jpg?t=1790947256",
+        "future": false
+      },
+      "link": "https://store.steampowered.com/app/2659410/_/"
+    },
+    {
+      "id": "dollsnest",
+      "name": "玩偶之巢",
+      "en": "Dolls Nest",
+      "category": "arcane",
+      "rarity": "legendary",
+      "glyph": "🪆",
+      "icon": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1839430/header.jpg?t=1790907299",
+      "byline": "NITRO PLUS 开发 · NITRO PLUS 发行 · 2025 年 4 月 23 日",
+      "tags": [
+        "人偶",
+        "机甲",
+        "废都"
+      ],
+      "desc": "以「霍德」的残骸为炉、以母体被剜目断肢的躯体为模,铸造替代双眼与四肢的造偶秘仪。铸成者是一具可任意更换部件的素体人偶,在崩塌的自治工厂世界里搜刮残料、击破区域之主,一路向核心掘进——只为替那位被拆解殆尽的神,把她被夺走的一切夺回来。",
+      "lore": [
+        "残章开篇是一段母体的自语:身躯被夺走,四肢被扯断,双眼被剜去。她没有留下复仇的咒文,只留下一道工序——把仅存的一切灌进摇篮,再造一个自己。",
+        "此后每一页都是铸偶者的行迹:谁在铁锈与断壁之间翻捡部件,谁拿敌人的残骸替自己接上新的手;谁在击破区域之主后,看见舆图上又裂开一片从未踏足的深渊。抄经人在末页写着——「你的诞生不是为了被爱,而是为了替我走完通向核心的那一段路。」"
+      ],
+      "stats": [
+        {
+          "label": "威力",
+          "value": 84
+        },
+        {
+          "label": "改造自由度",
+          "value": 92
+        },
+        {
+          "label": "代价",
+          "value": 60
+        },
+        {
+          "label": "禁忌等级",
+          "value": 78
+        }
+      ],
+      "weakness": "能量一旦耗尽便无法闪避与挥击;素体部件在战斗中损毁后,须退回避所重新装配",
+      "drops": [
+        "被剜去的眼球",
+        "素体部件·残",
+        "工厂核心的碎片"
+      ],
+      "habitat": "巨大陨坑 · 自治工厂世界「霍德」(Hod)",
+      "related": [
+        "elta",
+        "codevein2"
+      ],
+      "game": {
+        "start": "",
+        "end": "",
+        "days": 0,
+        "company": "",
+        "link": "",
+        "img": "",
+        "remoteImg": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1839430/header.jpg?t=1790907299",
+        "future": false
+      },
+      "link": "https://store.steampowered.com/app/1839430/Dolls_Nest/?l=schinese"
+    },
+    {
+      "id": "duetnightabyss",
+      "name": "二重螺旋",
+      "en": "Duet Night Abyss",
+      "category": "arcane",
+      "rarity": "legendary",
+      "glyph": "🌀",
+      "icon": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3950020/cac6c40accdc21d9d9f99573b05cb2477f417354/header_schinese.jpg?t=1788837172",
+      "byline": "Pan Studio 开发 · Hero Games 发行 · 2026 年 1 月 19 日",
+      "tags": [
+        "双生",
+        "螺旋",
+        "魔物"
+      ],
+      "desc": "把同一具灵魂分作两半、各掷于沙漏另一端的双生秘仪。漫长而重复的梦境里流沙不断倾泻,指针开始摆动,二人在两岸同时醒来:一岸从绝境中脱身,却被放逐到苦寒的北境挣扎求生;另一岸落入权谋的漩涡,只想从阴谋织成的牢笼里逃出去。施术者手持枪与刃,在魔物与机械并存的废土上不断换手,只为让两条注定相会的线,最终走到同一个交点上。",
+      "lore": [
+        "残章开篇只有一句判词:「不必告别。」抄经人说,术之所以称为双生,是因为施术的那一刻起,世上就再没有单独存在的命运——你在此岸劈开的每一道伤口,都会在此岸之外的那一半身上留下同样的裂纹。",
+        "此后每一页都是两岸交替的笔迹:北境的流沙、漩涡里的谎,谁在枪火与刀光之间来回换手,谁把百面之物逐一揭下面具。抄经人在末页补上最后一行——「沙漏倾倒时,两条螺旋终会相触;到那时,不要再问哪一半才是真的你。」"
+      ],
+      "stats": [
+        {
+          "label": "威力",
+          "value": 86
+        },
+        {
+          "label": "机动性",
+          "value": 90
+        },
+        {
+          "label": "代价",
+          "value": 58
+        },
+        {
+          "label": "禁忌等级",
+          "value": 82
+        }
+      ],
+      "weakness": "两半互为镜像,一岸的抉择必然改写另一岸的结局;近远武器切换需以能量支撑,断档即成空转",
+      "drops": [
+        "秘信残页",
+        "百面恶魔的面具",
+        "双生的武器零件"
+      ],
+      "habitat": "沙漏两端 · 魔物与机械并存之地「阿特拉斯」(Atlasia)",
+      "related": [
+        "dollsnest",
+        "codevein2"
+      ],
+      "game": {
+        "start": "",
+        "end": "",
+        "days": 0,
+        "company": "",
+        "link": "",
+        "img": "",
+        "remoteImg": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3950020/cac6c40accdc21d9d9f99573b05cb2477f417354/header_schinese.jpg?t=1788837172",
+        "future": false
+      },
+      "link": "https://store.steampowered.com/app/3950020/Duet_Night_Abyss/"
+    },
+    {
+      "id": "halloweenthegame",
+      "name": "万圣节:游戏",
+      "en": "Halloween: The Game",
+      "category": "arcane",
+      "rarity": "legendary",
+      "glyph": "🎃",
+      "icon": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3219630/153ed105c4b409fe689783e4f9b6aad72c152646/header.jpg?t=1789572547",
+      "byline": "IllFonic 开发 · IllFonic Publishing / Gun Interactive 发行 · 2026 年 9 月 8 日",
+      "tags": [
+        "面具",
+        "万圣",
+        "非对称"
+      ],
+      "desc": "以 1978 年那个万圣之夜为祭期的召邪秘仪。仪式被拆成两半:一半人戴上苍白的面具,化作只知跟踪与屠戮的执念之形,凭阴影与潜行喂饱嗜血之欲;另一半人以武器与家中杂物武装自己,在郊区小镇哈登菲尔德守夜、报警、疏散邻里,替无辜者争取逃离的时间。施术者可自两侧任择其一——扮演那不可被杀死的邪恶,或者站在原地直面它。",
+      "lore": [
+        "残章的第一页只记着一个日子:1978 年,万圣节之夜。小镇哈登菲尔德的居民正毫无防备地准备过节,而邪恶已经悄然回来了。没有人能从那只手里逃掉——这是原著留下的唯一一句判词。",
+        "后来有人把这卷残章改成可以反复施展的仪式:一方戴上苍白面具,以影子与静默逐一靠近;另一方只剩家里的杂物、邻居的警觉,以及警局一夜比一夜更密的巡灯。抄经人在末页补写道——「面具之下空无一物;真正让人恐惧的,是明知它不会被杀死,你还得站在原地。」"
+      ],
+      "stats": [
+        {
+          "label": "威力",
+          "value": 88
+        },
+        {
+          "label": "潜行",
+          "value": 92
+        },
+        {
+          "label": "代价",
+          "value": 55
+        },
+        {
+          "label": "禁忌等级",
+          "value": 90
+        }
+      ],
+      "weakness": "面具之形一旦暴露行踪,全镇都会警觉;过于张扬的屠杀会招来愈发严密的警方巡夜与镇民反扑",
+      "drops": [
+        "苍白的面具",
+        "哈登菲尔德的救难哨",
+        "不死的执念"
+      ],
+      "habitat": "郊区小镇「哈登菲尔德」(Haddonfield) · 1978 年万圣之夜",
+      "related": [
+        "codevein2",
+        "sanguinevigil"
+      ],
+      "game": {
+        "start": "",
+        "end": "",
+        "days": 0,
+        "company": "",
+        "link": "",
+        "img": "",
+        "remoteImg": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3219630/153ed105c4b409fe689783e4f9b6aad72c152646/header.jpg?t=1789572547",
+        "future": false
+      },
+      "link": "https://store.steampowered.com/app/3219630/Halloween_The_Game/"
+    },
+    {
+      "id": "starwarsgalacticracer",
+      "name": "星球大战:银河赛车手",
+      "en": "STAR WARS: Galactic Racer",
+      "category": "arcane",
+      "rarity": "legendary",
+      "glyph": "🏁",
+      "icon": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4078430/ad01abbb5196432a7ec9cd4656fa2ce0f735c3d7/header_schinese.jpg?t=1791300714",
+      "byline": "Fuse Games 开发 · Secret Mode 发行 · 2026 年 10 月 6 日",
+      "tags": [
+        "竞速",
+        "反重力",
+        "外环"
+      ],
+      "desc": "以「速度」为唯一祭品的竞速秘仪。帝国对银河系的统治瓦解之后,对速度的迷恋随之而生;在新共和国艰难重建的缝隙里,赌博、娱乐与荣耀催生出一个未经官方认可的地下联盟——银河联赛。施术者以各大财团的资财为注,驾驭陆行艇、飞行摩托、滑橇艇与飞梭赛车在赛道上猛烈撞击、左冲右突,几秒钟之内便决定自己赚得盆满钵满,还是输得倾家荡产。没有原力,没有预言,只有技巧、策略与崛起的意志。",
+      "lore": [
+        "残章起于一记覆灭:帝国终于瓦解。随之而来的并非秩序,而是对速度的迷恋——当新共和国还在废墟上艰难重建时,法外之地的地下世界已经先一步长大了。",
+        "此后每一页都是同一位孤胆飞行员「幽影」的笔迹:他在不断变动的联盟关系里挑选盟友,又在策略性的复仇之战中把他们一一甩在身后,只为追逐复仇与荣耀。抄经人在末页留下判词——「风险越大,回报越高;而这条赛道上,没有人会为你减速。」"
+      ],
+      "stats": [
+        {
+          "label": "威力",
+          "value": 82
+        },
+        {
+          "label": "速度",
+          "value": 95
+        },
+        {
+          "label": "代价",
+          "value": 66
+        },
+        {
+          "label": "禁忌等级",
+          "value": 74
+        }
+      ],
+      "weakness": "反重力载具各有各的物理脾性,挑错载具便难有胜算;每一次猛烈冲撞都要以自身的体损为赌注",
+      "drops": [
+        "反重力引擎核心",
+        "财团的注资",
+        "幽影的专享涂装"
+      ],
+      "habitat": "星球大战星系 · 法外之地的外环星域 · 银河联赛赛道",
+      "related": [
+        "duetnightabyss",
+        "elta"
+      ],
+      "game": {
+        "start": "",
+        "end": "",
+        "days": 0,
+        "company": "",
+        "link": "",
+        "img": "",
+        "remoteImg": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4078430/ad01abbb5196432a7ec9cd4656fa2ce0f735c3d7/header_schinese.jpg?t=1791300714",
+        "future": false
+      },
+      "link": "https://store.steampowered.com/app/4078430/_/"
+    },
+    {
+      "id": "vholume",
+      "name": "VHOLUME",
+      "en": "VHOLUME",
+      "category": "arcane",
+      "rarity": "legendary",
+      "glyph": "🏢",
+      "icon": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4131730/1b262360aa9cfa7ce376b2677b3c641556a7254f/header.jpg?t=1787478152",
+      "byline": "Nathan Grange / Léonard Lemaitre / Niels Tiercelin 开发 · IronEqual 发行 · 2026 年 8 月 21 日",
+      "tags": [
+        "跑酷",
+        "反乌托邦",
+        "官僚"
+      ],
+      "desc": "在一座粗野主义的反乌托邦之城里,把一件小事拖成奥德赛的官僚秘仪。亚非欧大陆那座破败的首都由「全能部委」统治,施术者名叫罗伯特,他要做的不是弑神,而是一桩再普通不过的差事:把家人被撤销的配给券重新要回来。仪式的全部要求只有「移动」——跳跃、奔跑、攀爬、滑行,在混凝土峡谷里凭速度寻捷径、压低目标时间,独自或与友人同行,还能看见前人在关卡里留下的幽灵。",
+      "lore": [
+        "残章的主角名叫罗伯特,他住在亚非欧大陆破败的首都。统治一切的,是「全能部委」。他要踏上的不是什么英雄之旅,而是一桩官僚任务——把家人被撤销的配给券重新领回来。",
+        "于是仪式的全部要求只剩下移动:跳跃、奔跑、攀爬、滑行,在粗野主义的混凝土峡谷里寻找捷径,与目标时间赛跑。他能看见前人留下的幽灵,也能把那些从未被写进官方路线的走法留给后来者。抄经人补注——「在只会把一件小事拖成奥德赛的世界里,快,是唯一的抗辩。」"
+      ],
+      "stats": [
+        {
+          "label": "机动性",
+          "value": 94
+        },
+        {
+          "label": "路线自由度",
+          "value": 88
+        },
+        {
+          "label": "代价",
+          "value": 46
+        },
+        {
+          "label": "禁忌等级",
+          "value": 62
+        }
+      ],
+      "weakness": "环境同时考验敏捷与创造力,唯一的对手是目标时间;路线一旦选错便只能整段重跑",
+      "drops": [
+        "被撤销的配给券",
+        "捷径的坐标",
+        "前人的幽灵记录"
+      ],
+      "habitat": "亚非欧大陆破败的首都 · 全能部委治下的粗野主义城区",
+      "related": [
+        "echoofnames",
+        "dollsnest"
+      ],
+      "game": {
+        "start": "",
+        "end": "",
+        "days": 0,
+        "company": "",
+        "link": "",
+        "img": "",
+        "remoteImg": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4131730/1b262360aa9cfa7ce376b2677b3c641556a7254f/header.jpg?t=1787478152",
+        "future": false
+      },
+      "link": "https://store.steampowered.com/app/4131730/VHOLUME/"
+    },
+    {
+      "id": "permafrost",
+      "name": "永冻纪元",
+      "en": "Permafrost",
+      "category": "arcane",
+      "rarity": "legendary",
+      "glyph": "❄️",
+      "icon": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2254990/693eff202c061aaecba330b44d76485a672bea97/header.jpg?t=1791288429",
+      "byline": "SpaceRocket Games 开发 · Toplitz Productions 发行 · 预定 2026 年 10 月 9 日",
+      "tags": [
+        "永冬",
+        "废墟",
+        "求生"
+      ],
+      "desc": "以一轮破碎的月亮为起点的永冬秘仪。灾难接连而至,月球终告碎裂,地球随之坠入永无止境的寒冬。施术者自称为「Rook」——一名拥有重建能力、却毫无野外生存经验的工程师;一段来自失联已久的好友的无线电信号,把他引向这片冰冷而残酷的世界。在冰封的城市与荒野之间穿行,狩猎、搜集、制作,修好废弃的避难所与旧时代那些脆弱的技术,并在各方势力控制的地界之间周旋。严寒并非背景,严寒才是真正的敌人。",
+      "lore": [
+        "残章起于一夜之间的崩解:一连串灾难最终让月球碎裂,阳光被尘埃吞没,地球坠入永无止境的冬天。从此这卷残章里既没有持续的枪火,也没有奇幻的设定,只有寂静与匮乏构成的紧张。",
+        "之后每一页都是同一位工程师的笔迹:他修好一间又一间废弃的避难所,把旧时代的废料重新接上电,循着那段时断时续的无线电信号往更深处走。跟在他身后的只有一条从废墟里救下的狗——替他探路、预警、搬运物资。抄经人在末页留下唯一一句劝告:「寒冷不会因为同行的人多就手下留情,它只是让你不至于独自面对寒冬。」"
+      ],
+      "stats": [
+        {
+          "label": "严寒",
+          "value": 92
+        },
+        {
+          "label": "探索深度",
+          "value": 86
+        },
+        {
+          "label": "代价",
+          "value": 70
+        },
+        {
+          "label": "禁忌等级",
+          "value": 68
+        }
+      ],
+      "weakness": "寒冷无处不在且仿佛拥有生命,冻伤、暴风雪与持续走低的体温会一寸寸吃掉外出的时间窗;补给与庇护一旦错判时机便再无退路",
+      "drops": [
+        "旧时代的可复用零件",
+        "废弃避难所的坐标",
+        "半坏的无线电台"
+      ],
+      "habitat": "月球破碎之后的地球 · 永无止境的冰封寒冬",
+      "related": [
+        "vholume",
+        "dollsnest"
+      ],
+      "game": {
+        "start": "",
+        "end": "",
+        "days": 0,
+        "company": "",
+        "link": "",
+        "img": "",
+        "remoteImg": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2254990/693eff202c061aaecba330b44d76485a672bea97/header.jpg?t=1791288429",
+        "future": false
+      },
+      "link": "https://store.steampowered.com/app/2254990/__Permafrost/"
+    },
+    {
+      "id": "concord",
+      "name": "星鸣特攻",
+      "en": "Concord",
+      "category": "arcane",
+      "rarity": "legendary",
+      "glyph": "🌠",
+      "icon": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2443720/header.jpg?t=1725380294",
+      "byline": "Firewalk Studios 开发 · PlayStation Publishing 发行 · 2024 年 8 月 23 日上线 · 同年 9 月 6 日停运",
+      "tags": [
+        "星海",
+        "五对五",
+        "陨落"
+      ],
+      "desc": "以「共鸣」为旗号的星海秘仪。仪式刻在诺森达号的航图上:召集一队自由兵——亡命之徒与冒险家,从神秘使、快枪手到治疗师各有其职——在星系之间展开 5v5 的对决,再把每个角色的战斗特质一点点磨熟。施术者从中挑出最中意的那一个,直到能左右整局胜负。然而这卷残章只被施展了两个星期:2024 年 8 月 23 日启航,9 月 6 日便已终止。宇宙没有终点,这一次的旅程却有。",
+      "lore": [
+        "残章的扉页写着一句开场白:「诺森达号,即将启航。集合,自由兵!」此后十六名自由兵、六种 PVP 模式与十二张地图被逐一登记在册,并许诺以每周的短片、免费的新角色与新世界,把这段旅程一直续写下去。",
+        "但残章只有寥寥几页。上线十四天之后,航图合上了——服务中断、退款、商店页撤下,连抄经人都来不及补写注解。同门的记载里只留下一行冷冷的注脚:「宇宙没有终点;而这一队人,连第一个星区都没走完。」"
+      ],
+      "stats": [
+        {
+          "label": "威力",
+          "value": 74
+        },
+        {
+          "label": "团队协作",
+          "value": 88
+        },
+        {
+          "label": "代价",
+          "value": 96
+        },
+        {
+          "label": "禁忌等级",
+          "value": 72
+        }
+      ],
+      "weakness": "上线即无人共鸣:十四天后服务终止,契约随之彻底失效",
+      "drops": [
+        "诺森达号的航图",
+        "十六名自由兵的变体",
+        "仅存两周的战场记录"
+      ],
+      "habitat": "诺森达号 · 星海之间的 5v5 战场(已于 2024 年 9 月 6 日停航)",
+      "related": [
+        "starwarsgalacticracer",
+        "duetnightabyss"
+      ],
+      "game": {
+        "start": "",
+        "end": "",
+        "days": 0,
+        "company": "",
+        "link": "",
+        "img": "",
+        "remoteImg": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2443720/header.jpg?t=1725380294",
+        "future": false
+      },
+      "link": "https://store.steampowered.com/app/2443720/Concord/"
+    },
+    {
+      "id": "wutheringwaves",
+      "name": "鸣潮",
+      "en": "Wuthering Waves",
+      "category": "arcane",
+      "rarity": "legendary",
+      "glyph": "🌊",
+      "icon": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3513350/20442df374a728252281e69ddaa77cdfa547fbe0/header_schinese.jpg?t=1790713386",
+      "byline": "KURO GAMES 开发 · KURO GAMES 发行 · 2025 年 4 月 28 日",
+      "tags": [
+        "退潮",
+        "共鸣",
+        "漂泊"
+      ],
+      "desc": "在悲鸣之后重新启程的退潮秘仪。人类被旧日的法则遗留,文明搁浅于滩涂;而随毁灭一同出现的异象,同样带来了新生。施术者是被称作「漂泊者」的旅人,在索拉里斯的无边世界里苏醒,凭解除体力限制的奔跑、蹬墙跑酷、自由翱翔与高机动科考摩托丈量边界——既是在找回回忆与自我身份的旅人,也是与无数「共鸣者」结伴同行的人。战斗要求极限闪避、逆势回击与声骸协战一气呵成;所有静默之后,是不遗余力的发声。",
+      "lore": [
+        "残章的第一句是一句致意:「漂泊的旅人,欢迎在这里醒来。」涨落无声,世界刚刚经历一场退潮;悲鸣降临,文明于滩涂搁浅。抄经人只肯把这场灾变记作「退潮」——因为谁也不知道潮水何时会再涨回来。",
+        "此后每一页都是同一位漂泊者的行迹:他与能力各异的共鸣者结伴,吸纳声骸之力,把未曾目睹的奇观一处一处走成已知;偶尔驻足,听一段悲鸣的余音。抄经人在末页补写——「潮声循环往复,文明再度启程;而你,或许就是那个带人类跨过滩涂的人。」"
+      ],
+      "stats": [
+        {
+          "label": "威力",
+          "value": 84
+        },
+        {
+          "label": "机动性",
+          "value": 92
+        },
+        {
+          "label": "代价",
+          "value": 52
+        },
+        {
+          "label": "禁忌等级",
+          "value": 70
+        }
+      ],
+      "weakness": "悲鸣的余音会持续侵蚀世界,越深入越难以回头;漂泊者的力量源自与声骸的共振,共振一旦断绝便形同凡人",
+      "drops": [
+        "声骸",
+        "共鸣者的残响",
+        "退潮后的滩涂坐标"
+      ],
+      "habitat": "索拉里斯(Solaris) · 悲鸣之后搁浅的文明滩涂",
+      "related": [
+        "duetnightabyss",
+        "permafrost"
+      ],
+      "game": {
+        "start": "",
+        "end": "",
+        "days": 0,
+        "company": "",
+        "link": "",
+        "img": "",
+        "remoteImg": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3513350/20442df374a728252281e69ddaa77cdfa547fbe0/header_schinese.jpg?t=1790713386",
+        "future": false
+      },
+      "link": "https://store.steampowered.com/app/3513350/Wuthering_Waves/"
     }
   ]
 }
