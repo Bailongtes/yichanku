@@ -518,9 +518,11 @@
         "</div>" +
         '<p class="detail-desc">' + esc(e.desc) + "</p>" +
         (isG ? gameFacts(e) : "") +
+        (!isG && e.byline ? metaLine("出处 / 制作者", e.byline) : "") +
         (!isG && e.habitat ? metaLine("出没 / 现存", e.habitat) : "") +
         (!isG && e.weakness ? metaLine("弱点 / 破解", e.weakness) : "") +
         (!isG && e.drops && e.drops.length ? metaLine("掉落 / 遗存", e.drops.join(" · ")) : "") +
+        sourceLinks(e) +
       "</div>" +
     "</div>";
 
@@ -587,6 +589,19 @@
            'letter-spacing:.18em;text-transform:uppercase;color:var(--parchment-mute)">' +
            esc(k) + "</span><br>" +
            '<span style="color:var(--parchment)">' + esc(v) + "</span></div>";
+  }
+
+  /* 原始资料外链:仅普通(非停服游戏)条目,用顶层 link 字段。
+     停服游戏条目一律不显示原站外链(2026-10-04 用户要求去掉)。 */
+  function sourceLinks(e) {
+    if (isGame(e)) return "";
+    var url = e.link || "";
+    if (!url) return "";
+    var label = /steampowered\.com/i.test(url) ? "↗ Steam 商店页" : "↗ 原始资料";
+    return '<div class="detail-src">' +
+      '<a class="ext-link" href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">' +
+      label + "</a>" +
+    "</div>";
   }
 
   function isoLabel(d) {

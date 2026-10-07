@@ -1009,6 +1009,7 @@ img { max-width: 100%; display: block; }
   transition: all .2s;
 }
 .ext-link:hover { color: var(--arcane-bright); border-bottom-color: var(--arcane-bright); }
+.detail-src { margin-top: 12px; }
 
 .empty {
   text-align: center;
