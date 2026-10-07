@@ -23,6 +23,9 @@
 
   var GAME_CAT = "relic";
 
+  /* 大列表渐进渲染:条目数超过 PAGE_SIZE 时先渲染一批,其余点击"加载更多" */
+  var PAGE_SIZE = 240;
+
   /* ------------------------------------------------------------
      封面图来源开关
      -----------------------------------------
@@ -394,6 +397,10 @@
     var isGameBrowse = state.category === GAME_CAT || state.month || state.company;
     var upcoming = state.month === "__upcoming__";
 
+    /* 筛选条件一旦变化,重新从第一批开始渲染 */
+    var sig = [state.category, state.tag, state.month, state.company, state.query, state.sort].join("|");
+    if (state.sig !== sig) { state.sig = sig; state.shown = PAGE_SIZE; }
+
     var title, sub;
     if (upcoming) {
       title = "⚠ 即将停服";
@@ -450,7 +457,14 @@
     "</div>";
 
     if (list.length) {
-      html += '<div class="grid">' + list.map(cardHTML).join("") + "</div>";
+      var shown = Math.min(state.shown || PAGE_SIZE, list.length);
+      html += '<div class="grid" id="browseGrid">' +
+              list.slice(0, shown).map(cardHTML).join("") + "</div>";
+      if (shown < list.length) {
+        html += '<div class="more-wrap">' +
+          '<button class="clear-btn" id="loadMoreBtn">加载更多 · 尚余 ' +
+          (list.length - shown) + " 款</button></div>";
+      }
     } else {
       html += '<div class="empty">' +
         '<div class="glyph">🕯</div>' +
@@ -522,7 +536,6 @@
         (!isG && e.habitat ? metaLine("出没 / 现存", e.habitat) : "") +
         (!isG && e.weakness ? metaLine("弱点 / 破解", e.weakness) : "") +
         (!isG && e.drops && e.drops.length ? metaLine("掉落 / 遗存", e.drops.join(" · ")) : "") +
-        sourceLinks(e) +
       "</div>" +
     "</div>";
 
@@ -591,18 +604,8 @@
            '<span style="color:var(--parchment)">' + esc(v) + "</span></div>";
   }
 
-  /* 原始资料外链:仅普通(非停服游戏)条目,用顶层 link 字段。
-     停服游戏条目一律不显示原站外链(2026-10-04 用户要求去掉)。 */
-  function sourceLinks(e) {
-    if (isGame(e)) return "";
-    var url = e.link || "";
-    if (!url) return "";
-    var label = /steampowered\.com/i.test(url) ? "↗ Steam 商店页" : "↗ 原始资料";
-    return '<div class="detail-src">' +
-      '<a class="ext-link" href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">' +
-      label + "</a>" +
-    "</div>";
-  }
+  /* 原站/商店外链已移除(2026-10-07 用户要求"禁止显示数据来源")。
+     条目里的 link 字段不再渲染,详见 data/entries.json。 */
 
   function isoLabel(d) {
     var p = d.split("-");
@@ -695,13 +698,39 @@
   }
 
   /* ---------- dynamic bindings after innerHTML ---------- */
-  function bindDynamic() {
-    /* cards */
+  function bindCards() {
     el.main.querySelectorAll(".card").forEach(function (node) {
+      if (node.dataset.bound) return;
+      node.dataset.bound = "1";
       node.addEventListener("click", function () {
         location.hash = "#/entry/" + encodeURIComponent(node.dataset.id);
       });
     });
+  }
+
+  function bindDynamic() {
+    /* cards */
+    bindCards();
+
+    /* load more · 大列表渐进渲染 */
+    var more = document.getElementById("loadMoreBtn");
+    if (more) {
+      more.addEventListener("click", function () {
+        var all = filtered();
+        var grid = document.getElementById("browseGrid");
+        var start = state.shown || PAGE_SIZE;
+        var end = Math.min(start + PAGE_SIZE, all.length);
+        if (!grid) return;
+        grid.insertAdjacentHTML("beforeend", all.slice(start, end).map(cardHTML).join(""));
+        state.shown = end;
+        if (end >= all.length) {
+          more.parentNode.removeChild(more);
+        } else {
+          more.textContent = "加载更多 · 尚余 " + (all.length - end) + " 款";
+        }
+        bindCards();
+      });
+    }
 
     /* tag chips inside main (detail meta) */
     el.main.querySelectorAll(".tag-chip[data-tag]").forEach(function (node) {

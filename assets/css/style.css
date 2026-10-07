@@ -485,6 +485,10 @@ img { max-width: 100%; display: block; }
 }
 .clear-btn:hover { color: var(--blood-bright); border-color: rgba(192,68,52,.5); }
 
+/* Load more · 大列表渐进渲染 */
+.more-wrap { text-align: center; margin: 34px 0 10px; }
+.more-wrap .clear-btn { padding: 9px 24px; font-size: 13px; }
+
 /* ============================================================
    Entry grid & cards
    ============================================================ */
