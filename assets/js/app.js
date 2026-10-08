@@ -919,19 +919,69 @@
         "· 左侧按分类浏览,或点击常见标签交叉筛选\n" +
         "· 按 / 快速聚焦搜索,按 Esc 清除\n" +
         "· 点右上角骰子随机翻一页\n\n" +
-        "内容存于 data/entries.json,可直接编辑扩充。"
+        "内容存于 data/entries.json(索引)与 data/entries/<分类>.json(分片),可直接编辑扩充。"
       );
+    });
+  }
+
+  /* ---------- data loading ----------
+     数据被拆成「索引 + 分类分片」以避开单个大文件:
+       data/entries.json          索引:meta + categories + shards 清单 + order
+       data/entries/<分类>.json    每个分类一个数组
+     旧格式(单文件内含 entries 数组)仍兼容。 */
+
+  function fetchJSON(url) {
+    return fetch(url, { cache: "no-cache" }).then(function (r) {
+      if (!r.ok) throw new Error("HTTP " + r.status + " · " + url.split("/").pop());
+      return r.json();
+    });
+  }
+
+  /* 分片按分类切开后,用索引里的 order(id 清单)还原成原始全局顺序 */
+  function assembleEntries(index, shardArrays) {
+    var byId = Object.create(null), all = [];
+    shardArrays.forEach(function (arr) {
+      arr.forEach(function (e) { if (e && e.id) { byId[e.id] = e; all.push(e); } });
+    });
+    if (!index.order || !index.order.length) return all;
+    var out = [], used = Object.create(null);
+    index.order.forEach(function (id) {
+      if (byId[id] && !used[id]) { used[id] = 1; out.push(byId[id]); }
+    });
+    all.forEach(function (e) { if (!used[e.id]) out.push(e); });   /* 清单外的条目兜底 */
+    return out;
+  }
+
+  function loadData() {
+    return fetchJSON("data/entries.json").then(function (index) {
+      if (!index || typeof index !== "object") throw new Error("数据格式无法识别");
+
+      if (index.shards && index.shards.length) {
+        return Promise.all(index.shards.map(function (s) {
+          return fetchJSON("data/" + s.file).then(function (arr) {
+            if (!Array.isArray(arr)) throw new Error("分片格式错误 · " + s.file);
+            return arr;
+          });
+        })).then(function (parts) {
+          index.entries = assembleEntries(index, parts);
+          return index;
+        });
+      }
+      /* 兼容旧的单文件 entries.json */
+      if (!Array.isArray(index.entries)) throw new Error("数据格式无法识别");
+      return index;
     });
   }
 
   /* ---------- boot ---------- */
   function boot() {
-    fetch("data/entries.json", { cache: "no-cache" })
-      .then(function (r) {
-        if (!r.ok) throw new Error("HTTP " + r.status);
-        return r.json();
-      })
+    el.main.innerHTML =
+      '<div class="empty"><div class="glyph">📜</div><h3>正在开启典藏</h3>' +
+      "<p>整理残卷书目……</p></div>";
+
+    loadData()
       .then(function (json) {
+        delete json.order;          /* 顺序已还原,清单本身无需留在内存 */
         DATA = json;
         loadImgMode();
         bindSidebar();
